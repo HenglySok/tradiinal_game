@@ -1,0 +1,65 @@
+[
+    {
+        "id": 1,
+        "title": "ដណ្កើមស្លឹកឈើ",
+        "views": "10k",
+        "imagePath": "assets/images/games/game1.png",
+        "type": "popular"
+    },
+    {
+        "id": 2,
+        "title": "ចោលឈូង",
+        "views": "200k",
+        "imagePath": "assets/images/games/game2.png",
+        "type": "popular"
+    },
+    {
+        "id": 3,
+        "title": "លោតប៉ាវ",
+        "views": "15k",
+        "imagePath": "assets/images/games/game3.png",
+        "type": "popular"
+    },
+    {
+        "id": 4,
+        "title": "បោះអង្គុញ",
+        "views": "10k",
+        "imagePath": "assets/images/games/game4.png",
+        "type": "new"
+    },
+    {
+        "id": 5,
+        "title": "វាយខ្អម",
+        "views": "10k",
+        "imagePath": "assets/images/games/game5.png",
+        "type": "new"
+    },
+    {
+        "id": 6,
+        "title": "ញ្ញុំបុិកួៈ",
+        "views": "111k",
+        "imagePath": "assets/images/games/game6.png",
+        "type": "new"
+    },
+    {
+        "id": 7,
+        "title": "ទាញព្រ័ត្រ",
+        "views": "550k",
+        "imagePath": "assets/images/games/game7.png",
+        "type": "other"
+    },
+    {
+        "id": 8,
+        "title": "លាក់កន្សែង",
+        "views": "6k",
+        "imagePath": "assets/images/games/game8.png",
+        "type": "other"
+    },
+    {
+        "id": 9,
+        "title": "រាំដណ្ដើមកៅអី",
+        "views": "4k",
+        "imagePath": "assets/images/games/game9.png",
+        "type": "other"
+    }
+]
