@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tradinal_game/providers/user_provider.dart';
-import 'package:tradinal_game/pages/auth/login_screen.dart'; // Ensure this path is correct
+import 'package:tradinal_game/pages/auth/login_screen.dart';
+import 'package:tradinal_game/pages/saved_list_screen.dart'; // Create these pages
+import 'package:tradinal_game/pages/liked_list_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Watch the UserProvider for data changes
     final userProv = Provider.of<UserProvider>(context);
     final String name = userProv.currentUserName;
     final String email = userProv.currentUserEmail;
@@ -21,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
         title: const Text(
           "MY PROFILE",
           style: TextStyle(
-            color: Color(0xff800000),
+            color: Color(0xff800000), // Dark Red
             fontWeight: FontWeight.bold,
             letterSpacing: 1.2,
           ),
@@ -59,11 +62,9 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 ElevatedButton(
-                  onPressed: () {
-                    // Navigate to Edit Profile Logic here
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xffA2D149),
+                    backgroundColor: const Color(0xffA2D149), // Green
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -79,25 +80,39 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: 40),
 
-          // --- FIXED MENU ITEMS CALLS ---
-          _buildMenuTile(Icons.save_outlined, "រក្សាទុក", () {
-            // Logic for Save
-          }),
+          // --- MENU TILES WITH DYNAMIC COUNTS ---
+          _buildMenuTile(
+            Icons.save_outlined,
+            "រក្សាទុក",
+            userProv.savedGames.length.toString(), // Display count
+            () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SavedListScreen()),
+            ),
+          ),
 
-          _buildMenuTile(Icons.favorite_outline, "ចូលចិត្ត", () {
-            // Logic for Favorites
-          }),
+          _buildMenuTile(
+            Icons.favorite_outline,
+            "ចូលចិត្ត",
+            userProv.likedGames.length.toString(),
+            () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LikedListScreen()),
+            ),
+          ),
 
-          _buildMenuTile(Icons.logout, "log out", () {
-            // LOGIC: Functional Logout button
-            _showLogoutDialog(context);
-          }, isLogout: true),
+          _buildMenuTile(
+            Icons.logout,
+            "log out",
+            null,
+            () => _showLogoutDialog(context),
+            isLogout: true,
+          ),
         ],
       ),
     );
   }
 
-  // LOGIC: Show confirmation before leaving
   void _showLogoutDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -110,14 +125,11 @@ class ProfileScreen extends StatelessWidget {
             child: const Text("ទេ"),
           ),
           TextButton(
-            onPressed: () {
-              // Clears history and goes to Login
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginScreen()),
-                (route) => false,
-              );
-            },
+            onPressed: () => Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+              (route) => false,
+            ),
             child: const Text("ចាកចេញ", style: TextStyle(color: Colors.red)),
           ),
         ],
@@ -128,6 +140,7 @@ class ProfileScreen extends StatelessWidget {
   Widget _buildMenuTile(
     IconData icon,
     String title,
+    String? count,
     VoidCallback onTap, {
     bool isLogout = false,
   }) {
@@ -147,13 +160,24 @@ class ProfileScreen extends StatelessWidget {
             color: isLogout ? Colors.red : Colors.black87,
           ),
         ),
-        trailing: isLogout
-            ? null
-            : const Icon(
+        // Add the count bubble/text if it exists
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (count != null)
+              Text(
+                count,
+                style: const TextStyle(color: Colors.grey, fontSize: 16),
+              ),
+            const SizedBox(width: 10),
+            if (!isLogout)
+              const Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.black,
                 size: 18,
               ),
+          ],
+        ),
         onTap: onTap,
       ),
     );

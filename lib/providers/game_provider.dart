@@ -1,56 +1,65 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../models/game_model.dart';
 
 class GameProvider extends ChangeNotifier {
-  List<dynamic> _games = [];
+  List<TraditionalGame> _games = [];
   bool _isLoading = true;
 
-  // History State
-  final List<dynamic> _historyGames = [];
-  List<dynamic> _filteredHistory = [];
+  final List<TraditionalGame> _historyGames = [];
+  List<TraditionalGame> _filteredHistory = [];
   String _historySearchQuery = "";
 
-  // Global Search State
-  List<dynamic> _filteredGames = [];
+  List<TraditionalGame> _filteredGames = [];
   String _searchQuery = "";
 
   // --- GETTERS ---
-  List<dynamic> get games => _games;
+  List<TraditionalGame> get games => _games;
   bool get isLoading => _isLoading;
-  List<dynamic> get historyGames => _historyGames;
+  List<TraditionalGame> get historyGames => _historyGames;
 
-  // FIX: Added the missing getter that caused your error
-  List<dynamic> get filteredHistory =>
+  List<TraditionalGame> get filteredHistory =>
       (_historySearchQuery.isEmpty) ? _historyGames : _filteredHistory;
 
-  List<dynamic> get filteredGames =>
-      _filteredGames.isEmpty && _searchQuery.isEmpty ? _games : _filteredGames;
+  List<TraditionalGame> get filteredGames =>
+      (_searchQuery.isEmpty) ? _games : _filteredGames;
 
-  // --- LOGIC ---
-
+  // --- LOADING ---
   Future<void> loadGames() async {
     try {
-      final String response = await rootBundle.loadString(
+      final String listResponse = await rootBundle.loadString(
         'assets/data/games.json',
       );
-      _games = json.decode(response);
+      final String detailResponse = await rootBundle.loadString(
+        'assets/data/details.json',
+      );
+
+      final List<dynamic> listData = json.decode(listResponse);
+      final List<dynamic> detailData = json.decode(detailResponse);
+
+      _games = listData.map((listItem) {
+        final detailItem = detailData.firstWhere(
+          (d) => d['id'] == listItem['id'],
+          orElse: () => null,
+        );
+        return TraditionalGame.fromMergedJson(listItem, detailItem);
+      }).toList();
+
       _isLoading = false;
       notifyListeners();
     } catch (e) {
-      debugPrint("Error loading JSON: $e");
+      debugPrint("Error: $e");
+      _isLoading = false;
+      notifyListeners();
     }
   }
 
-  void addToHistory(Map<String, dynamic> game) {
-    _historyGames.removeWhere((item) => item['id'] == game['id']);
+  // --- ACTIONS ---
+  void addToHistory(TraditionalGame game) {
+    _historyGames.removeWhere((item) => item.id == game.id);
     _historyGames.insert(0, game);
-
-    // Logic: If user is currently searching history, refresh that search too
-    if (_historySearchQuery.isNotEmpty) {
-      searchInHistory(_historySearchQuery);
-    }
-
+    if (_historySearchQuery.isNotEmpty) searchInHistory(_historySearchQuery);
     notifyListeners();
   }
 
@@ -60,8 +69,9 @@ class GameProvider extends ChangeNotifier {
       _filteredHistory = [];
     } else {
       _filteredHistory = _historyGames.where((game) {
-        final title = game['title'].toString().toLowerCase();
-        return title.contains(query.toLowerCase());
+        // Search by Khmer name or English name
+        return game.nameKh.contains(query) ||
+            game.nameEn.toLowerCase().contains(query.toLowerCase());
       }).toList();
     }
     notifyListeners();
@@ -70,11 +80,11 @@ class GameProvider extends ChangeNotifier {
   void searchGames(String query) {
     _searchQuery = query;
     if (query.isEmpty) {
-      _filteredGames = [];
+      _filteredGames = _games;
     } else {
       _filteredGames = _games.where((game) {
-        final title = game['title'].toString().toLowerCase();
-        return title.contains(query.toLowerCase());
+        return game.nameKh.contains(query) ||
+            game.nameEn.toLowerCase().contains(query.toLowerCase());
       }).toList();
     }
     notifyListeners();

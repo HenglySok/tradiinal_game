@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tradinal_game/providers/game_provider.dart';
 import 'package:tradinal_game/pages/detail_screen.dart';
+import 'package:tradinal_game/models/game_model.dart'; // Ensure this is imported
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // We watch the provider for any changes in search results
     final gameProvider = Provider.of<GameProvider>(context);
     final history = gameProvider.filteredHistory;
 
@@ -17,7 +17,6 @@ class HistoryScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        centerTitle: false,
         title: const Text(
           "ប្រវត្តិនៃការអាន",
           style: TextStyle(
@@ -29,18 +28,15 @@ class HistoryScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          // Search Bar Logic
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
-              onChanged: (value) =>
-                  gameProvider.searchInHistory(value), // Real-time search
+              onChanged: (value) => gameProvider.searchInHistory(value),
               decoration: InputDecoration(
-                hintText: "ស្វែងរកល្បែងប្រជាប្រិយក្នុងប្រវត្តិ",
+                hintText: "ស្វែងរកក្នុងប្រវត្តិ...",
                 prefixIcon: const Icon(Icons.search, color: Color(0xff800000)),
                 filled: true,
                 fillColor: Colors.grey[100],
-                contentPadding: const EdgeInsets.symmetric(vertical: 0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide: BorderSide.none,
@@ -48,7 +44,6 @@ class HistoryScreen extends StatelessWidget {
               ),
             ),
           ),
-
           Expanded(
             child: history.isEmpty
                 ? const Center(child: Text("មិនឃើញមានក្នុងប្រវត្តិទេ"))
@@ -56,6 +51,7 @@ class HistoryScreen extends StatelessWidget {
                     itemCount: history.length,
                     itemBuilder: (context, index) {
                       final game = history[index];
+                      // PASS the specific TraditionalGame type here
                       return _buildHistoryCard(context, game);
                     },
                   ),
@@ -65,10 +61,10 @@ class HistoryScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHistoryCard(BuildContext context, dynamic game) {
+  // Changed 'dynamic game' to 'TraditionalGame game'
+  Widget _buildHistoryCard(BuildContext context, TraditionalGame game) {
     return GestureDetector(
       onTap: () {
-        // Logic: Navigate to details when clicked
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => DetailScreen(game: game)),
@@ -93,10 +89,12 @@ class HistoryScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.asset(
-                'assets/${game['imagePath'].toString().replaceFirst('assets/', '')}',
+                game.imagePath, // Fixed: Use direct path from object
                 width: 80,
                 height: 80,
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) =>
+                    const Icon(Icons.image_not_supported, size: 40),
               ),
             ),
             const SizedBox(width: 15),
@@ -105,7 +103,7 @@ class HistoryScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    game['title'],
+                    game.nameKh, // Fixed: Using dot notation
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -113,7 +111,7 @@ class HistoryScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    "${game['views']} views",
+                    "${game.views} views", // Fixed: Using dot notation
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ],

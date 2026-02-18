@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tradinal_game/providers/game_provider.dart';
 import 'package:tradinal_game/pages/detail_screen.dart';
+import 'package:tradinal_game/models/game_model.dart'; // Import the model
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -26,12 +27,11 @@ class SearchScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          // The Search Input
+          // 1. Search Input
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
-              onChanged: (value) =>
-                  gameProvider.searchGames(value), // Real-time logic
+              onChanged: (value) => gameProvider.searchGames(value),
               decoration: InputDecoration(
                 hintText: "វាយឈ្មោះល្បែងនៅទីនេះ...",
                 prefixIcon: const Icon(Icons.search, color: Color(0xff800000)),
@@ -45,7 +45,7 @@ class SearchScreen extends StatelessWidget {
             ),
           ),
 
-          // The Results List
+          // 2. Results List
           Expanded(
             child: results.isEmpty
                 ? const Center(child: Text("មិនឃើញមានល្បែងដែលអ្នកស្វែងរកទេ"))
@@ -62,10 +62,11 @@ class SearchScreen extends StatelessWidget {
     );
   }
 
-  Widget _searchResultCard(BuildContext context, dynamic game) {
+  // Changed 'dynamic game' to 'TraditionalGame game'
+  Widget _searchResultCard(BuildContext context, TraditionalGame game) {
     return ListTile(
       onTap: () {
-        // Logically save to history when clicked
+        // Add to history and navigate
         Provider.of<GameProvider>(context, listen: false).addToHistory(game);
 
         Navigator.push(
@@ -76,17 +77,19 @@ class SearchScreen extends StatelessWidget {
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Image.asset(
-          'assets/${game['imagePath'].toString().replaceFirst('assets/', '')}',
+          game.imagePath, // Fixed: Direct access
           width: 50,
           height: 50,
           fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) =>
+              const Icon(Icons.image_not_supported),
         ),
       ),
       title: Text(
-        game['title'],
+        game.nameKh, // Fixed: Use nameKh or title based on your model
         style: const TextStyle(fontWeight: FontWeight.bold),
       ),
-      subtitle: Text("${game['views']} views"),
+      subtitle: Text("${game.views} views"), // Fixed: Use dot notation
       trailing: const Icon(Icons.arrow_forward_ios, size: 14),
     );
   }

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tradinal_game/components/game_card.dart';
 import 'package:tradinal_game/pages/detail_screen.dart';
 import 'package:tradinal_game/providers/game_provider.dart';
+import 'package:tradinal_game/models/game_model.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,12 +16,12 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: const Color(0xff800000),
+        backgroundColor: const Color(0xff800000), // Dark Red
         elevation: 0,
         title: const Text(
           "ល្បែងប្រជាប្រិយខ្មែរ",
           style: TextStyle(
-            color: Color(0xffFFD700),
+            color: Color(0xffFFD700), // Gold
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -47,18 +48,19 @@ class HomeScreen extends StatelessWidget {
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
+                  // Render sections based on the game 'type' field
                   _buildSection(
                     context,
                     title: "ធ្លាប់អានញាក់សាច់",
                     games: gameProvider.games
-                        .where((g) => g['type'] == 'popular')
+                        .where((g) => g.type == 'popular')
                         .toList(),
                   ),
                   _buildSection(
                     context,
                     title: "ថ្មីៗ",
                     games: gameProvider.games
-                        .where((g) => g['type'] == 'new')
+                        .where((g) => g.type == 'new')
                         .toList(),
                   ),
                   _buildSection(
@@ -66,9 +68,7 @@ class HomeScreen extends StatelessWidget {
                     title: "ផ្សេងៗ",
                     games: gameProvider.games
                         .where(
-                          (g) =>
-                              g['type'] == 'other' ||
-                              g['type'] == 'traditional',
+                          (g) => g.type == 'other' || g.type == 'traditional',
                         )
                         .toList(),
                   ),
@@ -82,7 +82,7 @@ class HomeScreen extends StatelessWidget {
   Widget _buildSection(
     BuildContext context, {
     required String title,
-    required List games,
+    required List<TraditionalGame> games,
   }) {
     if (games.isEmpty) return const SizedBox.shrink();
 
@@ -110,33 +110,35 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 190,
+          height: 200, // Adjusted height for better card display
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 10),
             itemCount: games.length,
             itemBuilder: (context, index) {
               final game = games[index];
+
               return GestureDetector(
                 onTap: () {
+                  // Add to history and Navigate to Detail
                   Provider.of<GameProvider>(
                     context,
                     listen: false,
                   ).addToHistory(game);
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
+                      // IMPORTANT: Pass the whole object
                       builder: (context) => DetailScreen(game: game),
                     ),
                   );
                 },
                 child: GameCard(
-                  imagePath: game['imagePath'].toString().replaceFirst(
-                    'assets/',
-                    '',
-                  ),
-                  title: game['title'],
-                  views: game['views'],
+                  // Use nameKh or title based on your model's property
+                  imagePath: game.imagePath,
+                  title: game.nameKh,
+                  views: game.views,
                 ),
               );
             },
