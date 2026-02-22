@@ -14,7 +14,7 @@ class GameProvider extends ChangeNotifier {
   List<TraditionalGame> _filteredGames = [];
   String _searchQuery = "";
 
-  // --- GETTERS ---
+  
   List<TraditionalGame> get games => _games;
   bool get isLoading => _isLoading;
   List<TraditionalGame> get historyGames => _historyGames;
@@ -25,7 +25,7 @@ class GameProvider extends ChangeNotifier {
   List<TraditionalGame> get filteredGames =>
       (_searchQuery.isEmpty) ? _games : _filteredGames;
 
-  // --- LOADING ---
+  
   Future<void> loadGames() async {
     try {
       final String listResponse = await rootBundle.loadString(
@@ -55,7 +55,7 @@ class GameProvider extends ChangeNotifier {
     }
   }
 
-  // --- ACTIONS ---
+  
   void addToHistory(TraditionalGame game) {
     _historyGames.removeWhere((item) => item.id == game.id);
     _historyGames.insert(0, game);
@@ -69,7 +69,7 @@ class GameProvider extends ChangeNotifier {
       _filteredHistory = [];
     } else {
       _filteredHistory = _historyGames.where((game) {
-        // Search by Khmer name or English name
+        
         return game.nameKh.contains(query) ||
             game.nameEn.toLowerCase().contains(query.toLowerCase());
       }).toList();

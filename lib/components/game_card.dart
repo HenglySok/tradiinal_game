@@ -1,4 +1,4 @@
-// lib/components/game_card.dart
+
 
 import 'package:flutter/material.dart';
 
@@ -33,18 +33,18 @@ class GameCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // THE IMAGE SECTION
+          
           Expanded(
             child: ClipRRect(
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(12),
               ),
               child: Image.asset(
-                imagePath, // Use directly: the model already fixed this!
+                imagePath, 
                 width: double.infinity,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
-                  // This helps you debug the exact path that is failing
+                  
                   return Container(
                     color: Colors.grey[200],
                     child: const Icon(Icons.broken_image, color: Colors.grey),

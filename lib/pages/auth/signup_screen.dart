@@ -12,13 +12,13 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  // Controllers to capture user input
+  
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   final TextEditingController _confirmPassController = TextEditingController();
 
-  // State for toggling password visibility
+  
   bool _obscurePassword = true;
 
   void _handleSignUp() {
@@ -43,7 +43,7 @@ class _SignupScreenState extends State<SignupScreen> {
           const SnackBar(content: Text("បង្កើតគណនីជោគជ័យ! (Account Created)")),
         );
 
-        Navigator.pop(context); // Go back to Login
+        Navigator.pop(context); 
       }
     }
   }
@@ -51,7 +51,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff800000), // Dark Red Header
+      backgroundColor: const Color(0xff800000), 
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -59,7 +59,7 @@ class _SignupScreenState extends State<SignupScreen> {
             const Text(
               "ល្បែងប្រជាប្រិយខ្មែរ",
               style: TextStyle(
-                color: Color(0xffFFD700), // Gold Text
+                color: Color(0xffFFD700), 
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
@@ -90,7 +90,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     const SizedBox(height: 25),
 
-                    // Name Field
+                    
                     _buildInputField(
                       controller: _nameController,
                       hint: "Full Name",
@@ -100,7 +100,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           : null,
                     ),
 
-                    // Universal Email Validation (Allows any @domain)
+                    
                     _buildInputField(
                       controller: _emailController,
                       hint: "Email Address",
@@ -109,7 +109,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         if (val == null || val.isEmpty) {
                           return "Please enter your email";
                         }
-                        // Regex to check for standard email format
+                        
                         final bool emailValid = RegExp(
                           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
                         ).hasMatch(val);
@@ -120,7 +120,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       },
                     ),
 
-                    // Password with Visibility Toggle
+                    
                     _buildInputField(
                       controller: _passController,
                       hint: "Password",
@@ -137,7 +137,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           : null,
                     ),
 
-                    // Confirm Password with Visibility Toggle
+                    
                     _buildInputField(
                       controller: _confirmPassController,
                       hint: "Confirm Password",
@@ -156,7 +156,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                     const SizedBox(height: 20),
 
-                    // Sign Up Button
+                    
                     SizedBox(
                       width: double.infinity,
                       height: 55,
@@ -220,7 +220,7 @@ class _SignupScreenState extends State<SignupScreen> {
         decoration: InputDecoration(
           hintText: hint,
           prefixIcon: Icon(icon, color: Colors.grey),
-          // Suffix icon for password visibility
+          
           suffixIcon: isPassword
               ? IconButton(
                   icon: Icon(

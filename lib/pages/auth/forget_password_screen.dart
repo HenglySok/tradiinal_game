@@ -14,7 +14,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _newPassController = TextEditingController();
 
-  // Logic state
+  
   bool _isEmailVerified = false;
   bool _isObscure = true;
 
@@ -23,7 +23,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     final String email = _emailController.text.trim();
 
     if (!_isEmailVerified) {
-      // Step 1: Verify if account exists
+      
       if (userProv.checkEmailExists(email)) {
         setState(() {
           _isEmailVerified = true;
@@ -42,7 +42,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         );
       }
     } else {
-      // Step 2: Update the password in Provider
+      
       if (_formKey.currentState!.validate()) {
         userProv.updatePassword(email, _newPassController.text);
 
@@ -50,7 +50,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           const SnackBar(content: Text("Password updated successfully!")),
         );
 
-        Navigator.pop(context); // Return to Login Screen
+        Navigator.pop(context); 
       }
     }
   }
@@ -58,7 +58,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff800000), // Match your theme
+      backgroundColor: const Color(0xff800000), 
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -113,10 +113,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       ),
                       const SizedBox(height: 30),
 
-                      // Email Input Field
+                      
                       TextFormField(
                         controller: _emailController,
-                        readOnly: _isEmailVerified, // Lock email once verified
+                        readOnly: _isEmailVerified, 
                         decoration: InputDecoration(
                           hintText: "Email Address",
                           prefixIcon: const Icon(Icons.email_outlined),
@@ -133,7 +133,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
                       if (_isEmailVerified) ...[
                         const SizedBox(height: 20),
-                        // New Password Input Field
+                        
                         TextFormField(
                           controller: _newPassController,
                           obscureText: _isObscure,
@@ -164,7 +164,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
                       const SizedBox(height: 40),
 
-                      // Action Button
+                      
                       SizedBox(
                         width: double.infinity,
                         height: 55,

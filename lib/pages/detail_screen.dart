@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/game_model.dart';
-import '../providers/user_provider.dart'; // Ensure this exists
+import '../providers/user_provider.dart'; 
 
 class DetailScreen extends StatelessWidget {
   final TraditionalGame game;
@@ -9,7 +9,7 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Watch the UserProvider for changes in like/save status
+    
     final userProvider = Provider.of<UserProvider>(context);
     final bool isSaved = userProvider.isSaved(game.id);
     final bool isLiked = userProvider.isLiked(game.id);
@@ -17,7 +17,7 @@ class DetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFE5E7EB),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF800000), // Dark Red
+        backgroundColor: const Color(0xFF800000), 
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Color(0xFFFFD700)),
           onPressed: () => Navigator.pop(context),
@@ -37,7 +37,7 @@ class DetailScreen extends StatelessWidget {
           children: [
             _buildHeaderImage(),
 
-            // Interaction Bar: Like and Save
+            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -47,7 +47,7 @@ class DetailScreen extends StatelessWidget {
                     onPressed: () => userProvider.toggleSave(game),
                     icon: Icon(
                       isSaved ? Icons.bookmark : Icons.bookmark_border,
-                      color: const Color(0xFF800000), // Match App Bar
+                      color: const Color(0xFF800000), 
                       size: 30,
                     ),
                   ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/game_model.dart';
 
 class UserProvider extends ChangeNotifier {
-  // We should also store names to keep the UI consistent
+  
   final Map<String, String> _userDatabase = {"guest@example.com": "12345678"};
   final Map<String, String> _userNameDatabase = {
     "guest@example.com": "Guest User",
@@ -39,20 +39,20 @@ class UserProvider extends ChangeNotifier {
     _currentUserName = name;
     _currentUserEmail = cleanEmail;
     _userDatabase[cleanEmail] = password;
-    _userNameDatabase[cleanEmail] = name; // Store the name too
+    _userNameDatabase[cleanEmail] = name; 
     notifyListeners();
   }
 
-  // FIXED: updatePassword method
+  
   void updatePassword(String email, String newPassword) {
     String cleanEmail = email.trim().toLowerCase();
     if (_userDatabase.containsKey(cleanEmail)) {
-      _userDatabase[cleanEmail] = newPassword; // Fixed variable name here
+      _userDatabase[cleanEmail] = newPassword; 
       notifyListeners();
     }
   }
 
-  // Helper to get name during password reset
+  
   String getUserNameByEmail(String email) {
     return _userNameDatabase[email.trim().toLowerCase()] ?? "User";
   }

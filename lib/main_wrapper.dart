@@ -14,23 +14,23 @@ class MainWrapper extends StatefulWidget {
 class _MainWrapperState extends State<MainWrapper> {
   int _selectedIndex = 0;
 
-  // These are the screens for each tab
+  
   final List<Widget> _pages = [
     const HomeScreen(),
     const SearchScreen(),
-    const HistoryScreen(), // Placeholder
-    const ProfileScreen(), // Placeholder
+    const HistoryScreen(), 
+    const ProfileScreen(), 
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // The body updates based on which icon you click
+      
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
         height: 85,
         decoration: const BoxDecoration(
-          color: Color(0xff800000), // Dark Red
+          color: Color(0xff800000), 
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),
             topRight: Radius.circular(30),
@@ -54,7 +54,7 @@ class _MainWrapperState extends State<MainWrapper> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          _selectedIndex = index; // Rebuilds the UI to show the new page
+          _selectedIndex = index; 
         });
       },
       child: Column(
@@ -71,7 +71,7 @@ class _MainWrapperState extends State<MainWrapper> {
               height: 3,
               width: 25,
               decoration: BoxDecoration(
-                color: const Color(0xffFFD700), // Gold line for active tab
+                color: const Color(0xffFFD700), 
                 borderRadius: BorderRadius.circular(10),
               ),
             ),

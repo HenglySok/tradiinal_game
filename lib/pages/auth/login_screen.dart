@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tradinal_game/main_wrapper.dart';
 import 'package:tradinal_game/providers/user_provider.dart';
 import 'package:tradinal_game/pages/auth/signup_screen.dart';
-// CRITICAL: This import must exist to avoid the "InvalidType" error
+
 import 'package:tradinal_game/pages/auth/forget_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -60,14 +60,14 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xff800000), // Dark Red
+      backgroundColor: const Color(0xff800000), 
       body: Column(
         children: [
           const SizedBox(height: 60),
           const Text(
             "ល្បែងប្រជាប្រិយខ្មែរ",
             style: TextStyle(
-              color: Color(0xffFFD700), // Gold
+              color: Color(0xffFFD700), 
               fontSize: 28,
               fontWeight: FontWeight.bold,
             ),
@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 30),
 
-                      // Email Field
+                      
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 15),
 
-                      // Password Field
+                      
                       TextFormField(
                         controller: _passwordController,
                         obscureText: _isObscure,
@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             : null,
                       ),
 
-                      // Forget Password Link - Moved inside the Form
+                      
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
@@ -166,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       const SizedBox(height: 15),
 
-                      // Sign In Button
+                      
                       SizedBox(
                         width: double.infinity,
                         height: 55,

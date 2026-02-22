@@ -24,7 +24,7 @@ class TraditionalGame {
     Map<String, dynamic>? detailJson,
   ) {
     String rawPath = listJson['imagePath'] ?? "";
-    // Fix for Android: Ensure path starts with 'assets/'
+    
     String fixedPath = rawPath.startsWith('assets/')
         ? rawPath
         : 'assets/$rawPath';

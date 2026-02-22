@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tradinal_game/providers/user_provider.dart';
 import 'package:tradinal_game/pages/auth/login_screen.dart';
-import 'package:tradinal_game/pages/saved_list_screen.dart'; // Create these pages
+import 'package:tradinal_game/pages/saved_list_screen.dart'; 
 import 'package:tradinal_game/pages/liked_list_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -10,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Watch the UserProvider for data changes
+    
     final userProv = Provider.of<UserProvider>(context);
     final String name = userProv.currentUserName;
     final String email = userProv.currentUserEmail;
@@ -24,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
         title: const Text(
           "MY PROFILE",
           style: TextStyle(
-            color: Color(0xff800000), // Dark Red
+            color: Color(0xff800000), 
             fontWeight: FontWeight.bold,
             letterSpacing: 1.2,
           ),
@@ -64,7 +64,7 @@ class ProfileScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xffA2D149), // Green
+                    backgroundColor: const Color(0xffA2D149), 
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -80,11 +80,11 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: 40),
 
-          // --- MENU TILES WITH DYNAMIC COUNTS ---
+          
           _buildMenuTile(
             Icons.save_outlined,
             "រក្សាទុក",
-            userProv.savedGames.length.toString(), // Display count
+            userProv.savedGames.length.toString(), 
             () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const SavedListScreen()),
@@ -160,7 +160,7 @@ class ProfileScreen extends StatelessWidget {
             color: isLogout ? Colors.red : Colors.black87,
           ),
         ),
-        // Add the count bubble/text if it exists
+        
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

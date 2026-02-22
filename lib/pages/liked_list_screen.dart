@@ -13,7 +13,7 @@ class LikedListScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xff800000), // Dark Red
+        backgroundColor: const Color(0xff800000), 
         title: const Text(
           "ចូលចិត្ត",
           style: TextStyle(color: Color(0xffFFD700)),

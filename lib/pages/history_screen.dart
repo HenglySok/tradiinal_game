@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tradinal_game/providers/game_provider.dart';
 import 'package:tradinal_game/pages/detail_screen.dart';
-import 'package:tradinal_game/models/game_model.dart'; // Ensure this is imported
+import 'package:tradinal_game/models/game_model.dart'; 
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
@@ -51,7 +51,7 @@ class HistoryScreen extends StatelessWidget {
                     itemCount: history.length,
                     itemBuilder: (context, index) {
                       final game = history[index];
-                      // PASS the specific TraditionalGame type here
+                      
                       return _buildHistoryCard(context, game);
                     },
                   ),
@@ -61,7 +61,7 @@ class HistoryScreen extends StatelessWidget {
     );
   }
 
-  // Changed 'dynamic game' to 'TraditionalGame game'
+  
   Widget _buildHistoryCard(BuildContext context, TraditionalGame game) {
     return GestureDetector(
       onTap: () {
@@ -89,7 +89,7 @@ class HistoryScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.asset(
-                game.imagePath, // Fixed: Use direct path from object
+                game.imagePath, 
                 width: 80,
                 height: 80,
                 fit: BoxFit.cover,
@@ -103,7 +103,7 @@ class HistoryScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    game.nameKh, // Fixed: Using dot notation
+                    game.nameKh, 
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -111,7 +111,7 @@ class HistoryScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    "${game.views} views", // Fixed: Using dot notation
+                    "${game.views} views", 
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ],

@@ -16,12 +16,12 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: const Color(0xff800000), // Dark Red
+        backgroundColor: const Color(0xff800000), 
         elevation: 0,
         title: const Text(
           "ល្បែងប្រជាប្រិយខ្មែរ",
           style: TextStyle(
-            color: Color(0xffFFD700), // Gold
+            color: Color(0xffFFD700), 
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  // Banner Image
+                  
                   Image.asset(
                     'assets/images/banner.png',
                     width: double.infinity,
@@ -107,7 +107,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 220, // Increased slightly for better card fit
+          height: 220, 
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -129,8 +129,8 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
                 child: GameCard(
-                  // FIXED: The Model now handles the 'assets/' prefix.
-                  // Just pass game.imagePath directly.
+                  
+                  
                   imagePath: game.imagePath,
                   title: game.nameKh,
                   views: game.views,

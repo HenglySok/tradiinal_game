@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tradinal_game/providers/game_provider.dart';
 import 'package:tradinal_game/pages/detail_screen.dart';
-import 'package:tradinal_game/models/game_model.dart'; // Import the model
+import 'package:tradinal_game/models/game_model.dart'; 
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -27,7 +27,7 @@ class SearchScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          // 1. Search Input
+          
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
@@ -45,7 +45,7 @@ class SearchScreen extends StatelessWidget {
             ),
           ),
 
-          // 2. Results List
+          
           Expanded(
             child: results.isEmpty
                 ? const Center(child: Text("មិនឃើញមានល្បែងដែលអ្នកស្វែងរកទេ"))
@@ -62,11 +62,11 @@ class SearchScreen extends StatelessWidget {
     );
   }
 
-  // Changed 'dynamic game' to 'TraditionalGame game'
+  
   Widget _searchResultCard(BuildContext context, TraditionalGame game) {
     return ListTile(
       onTap: () {
-        // Add to history and navigate
+        
         Provider.of<GameProvider>(context, listen: false).addToHistory(game);
 
         Navigator.push(
@@ -77,7 +77,7 @@ class SearchScreen extends StatelessWidget {
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Image.asset(
-          game.imagePath, // Fixed: Direct access
+          game.imagePath, 
           width: 50,
           height: 50,
           fit: BoxFit.cover,
@@ -86,10 +86,10 @@ class SearchScreen extends StatelessWidget {
         ),
       ),
       title: Text(
-        game.nameKh, // Fixed: Use nameKh or title based on your model
+        game.nameKh, 
         style: const TextStyle(fontWeight: FontWeight.bold),
       ),
-      subtitle: Text("${game.views} views"), // Fixed: Use dot notation
+      subtitle: Text("${game.views} views"), 
       trailing: const Icon(Icons.arrow_forward_ios, size: 14),
     );
   }
