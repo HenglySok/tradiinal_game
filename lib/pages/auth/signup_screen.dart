@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tradinal_game/Colors/app_colors.dart';
 import 'package:tradinal_game/providers/user_provider.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -51,7 +52,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff800000), 
+      backgroundColor: AppColors.primary,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -59,7 +60,7 @@ class _SignupScreenState extends State<SignupScreen> {
             const Text(
               "ល្បែងប្រជាប្រិយខ្មែរ",
               style: TextStyle(
-                color: Color(0xffFFD700), 
+                color: AppColors.gold,
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
@@ -85,7 +86,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xff800000),
+                        color: AppColors.primary,
                       ),
                     ),
                     const SizedBox(height: 25),
@@ -163,7 +164,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       child: ElevatedButton(
                         onPressed: _handleSignUp,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xffA53232),
+                          backgroundColor: AppColors.altPrimary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),

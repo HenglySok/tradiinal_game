@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tradinal_game/components/game_card.dart';
 import 'package:tradinal_game/pages/detail_screen.dart';
 import 'package:tradinal_game/providers/game_provider.dart';
+import 'package:tradinal_game/Colors/app_colors.dart';
 import 'package:tradinal_game/models/game_model.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -16,12 +17,12 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: const Color(0xff800000), 
+        backgroundColor: AppColors.primary, 
         elevation: 0,
         title: const Text(
           "ល្បែងប្រជាប្រិយខ្មែរ",
           style: TextStyle(
-            color: Color(0xffFFD700), 
+            color: AppColors.gold, 
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -29,7 +30,7 @@ class HomeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 15),
             child: CircleAvatar(
-              backgroundColor: const Color(0xffFFD700),
+              backgroundColor: AppColors.gold,
               child: IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.notifications, color: Colors.black),
@@ -102,7 +103,7 @@ class HomeScreen extends StatelessWidget {
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Color(0xff800000),
+              color: AppColors.primary,
             ),
           ),
         ),

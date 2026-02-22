@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tradinal_game/Colors/app_colors.dart';
 import 'package:tradinal_game/main_wrapper.dart';
 import 'package:tradinal_game/providers/user_provider.dart';
 import 'package:tradinal_game/pages/auth/signup_screen.dart';
@@ -60,14 +61,14 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xff800000), 
+      backgroundColor: AppColors.primary,
       body: Column(
         children: [
           const SizedBox(height: 60),
           const Text(
             "ល្បែងប្រជាប្រិយខ្មែរ",
             style: TextStyle(
-              color: Color(0xffFFD700), 
+              color: AppColors.gold,
               fontSize: 28,
               fontWeight: FontWeight.bold,
             ),
@@ -103,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           enabledBorder: outlineBorder,
                           focusedBorder: outlineBorder.copyWith(
                             borderSide: const BorderSide(
-                              color: Color(0xff800000),
+                              color: AppColors.primary,
                               width: 2,
                             ),
                           ),
@@ -133,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           enabledBorder: outlineBorder,
                           focusedBorder: outlineBorder.copyWith(
                             borderSide: const BorderSide(
-                              color: Color(0xff800000),
+                              color: AppColors.primary,
                               width: 2,
                             ),
                           ),
@@ -173,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: ElevatedButton(
                           onPressed: _handleLogin,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xff800000),
+                            backgroundColor: AppColors.primary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),

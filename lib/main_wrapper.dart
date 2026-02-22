@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tradinal_game/pages/history_screen.dart';
 import 'package:tradinal_game/pages/home_screen.dart';
+import 'package:tradinal_game/Colors/app_colors.dart';
 import 'package:tradinal_game/pages/profile_screen.dart';
 import 'package:tradinal_game/pages/search_screen.dart';
 
@@ -30,7 +31,7 @@ class _MainWrapperState extends State<MainWrapper> {
       bottomNavigationBar: Container(
         height: 85,
         decoration: const BoxDecoration(
-          color: Color(0xff800000), 
+          color: AppColors.primary,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),
             topRight: Radius.circular(30),
@@ -63,7 +64,7 @@ class _MainWrapperState extends State<MainWrapper> {
           Icon(
             icon,
             size: 30,
-            color: isActive ? const Color(0xffFFD700) : Colors.white60,
+            color: isActive ? AppColors.gold : Colors.white60,
           ),
           if (isActive)
             Container(
@@ -71,7 +72,7 @@ class _MainWrapperState extends State<MainWrapper> {
               height: 3,
               width: 25,
               decoration: BoxDecoration(
-                color: const Color(0xffFFD700), 
+                color: AppColors.gold,
                 borderRadius: BorderRadius.circular(10),
               ),
             ),

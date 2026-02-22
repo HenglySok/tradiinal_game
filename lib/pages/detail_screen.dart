@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/game_model.dart';
 import '../providers/user_provider.dart'; 
+import 'package:tradinal_game/Colors/app_colors.dart';
 
 class DetailScreen extends StatelessWidget {
   final TraditionalGame game;
@@ -15,17 +16,17 @@ class DetailScreen extends StatelessWidget {
     final bool isLiked = userProvider.isLiked(game.id);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFE5E7EB),
+      backgroundColor: AppColors.lightGray,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF800000), 
+        backgroundColor: AppColors.primary, 
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Color(0xFFFFD700)),
+          icon: const Icon(Icons.arrow_back_ios, color: AppColors.gold),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           game.nameKh,
           style: const TextStyle(
-            color: Color(0xFFFFD700),
+            color: AppColors.gold,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -47,7 +48,7 @@ class DetailScreen extends StatelessWidget {
                     onPressed: () => userProvider.toggleSave(game),
                     icon: Icon(
                       isSaved ? Icons.bookmark : Icons.bookmark_border,
-                      color: const Color(0xFF800000), 
+                      color: AppColors.primary, 
                       size: 30,
                     ),
                   ),
@@ -55,7 +56,7 @@ class DetailScreen extends StatelessWidget {
                     onPressed: () => userProvider.toggleLike(game),
                     icon: Icon(
                       isLiked ? Icons.favorite : Icons.favorite_border,
-                      color: const Color(0xFF800000),
+                      color: AppColors.primary,
                       size: 30,
                     ),
                   ),

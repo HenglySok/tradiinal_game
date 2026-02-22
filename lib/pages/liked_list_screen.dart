@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
 import 'detail_screen.dart';
+import 'package:tradinal_game/Colors/app_colors.dart';
 
 class LikedListScreen extends StatelessWidget {
   const LikedListScreen({super.key});
@@ -13,13 +14,13 @@ class LikedListScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xff800000), 
+        backgroundColor: AppColors.primary,
         title: const Text(
           "ចូលចិត្ត",
-          style: TextStyle(color: Color(0xffFFD700)),
+          style: TextStyle(color: AppColors.gold),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Color(0xffFFD700)),
+          icon: const Icon(Icons.arrow_back_ios, color: AppColors.gold),
           onPressed: () => Navigator.pop(context),
         ),
       ),

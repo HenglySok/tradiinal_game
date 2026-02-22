@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tradinal_game/Colors/app_colors.dart';
 import 'package:provider/provider.dart';
 import 'package:tradinal_game/providers/user_provider.dart';
 
@@ -58,7 +59,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff800000), 
+      backgroundColor: AppColors.primary,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -69,10 +70,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       ),
       body: Column(
         children: [
+          const SizedBox(height: 20),
           const Text(
             "Forgot Password",
             style: TextStyle(
-              color: Color(0xffFFD700),
+              color: Color(0xFFFFD700),
               fontSize: 28,
               fontWeight: FontWeight.bold,
             ),
@@ -95,13 +97,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _isEmailVerified
-                            ? "Set New Password"
-                            : "Verify Account",
-                        style: const TextStyle(
+                        _isEmailVerified ? "Set New Password" : "Verify Account",
+                        style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xff800000),
+                          color: AppColors.primary,
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -113,17 +113,14 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       ),
                       const SizedBox(height: 30),
 
-                      
                       TextFormField(
                         controller: _emailController,
-                        readOnly: _isEmailVerified, 
+                        readOnly: _isEmailVerified,
                         decoration: InputDecoration(
                           hintText: "Email Address",
                           prefixIcon: const Icon(Icons.email_outlined),
                           filled: true,
-                          fillColor: _isEmailVerified
-                              ? Colors.grey[200]
-                              : Colors.grey[100],
+                          fillColor: _isEmailVerified ? Colors.grey[200] : Colors.grey[100],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide.none,
@@ -133,7 +130,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
                       if (_isEmailVerified) ...[
                         const SizedBox(height: 20),
-                        
                         TextFormField(
                           controller: _newPassController,
                           obscureText: _isObscure,
@@ -141,13 +137,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                             hintText: "New Password",
                             prefixIcon: const Icon(Icons.lock_outline),
                             suffixIcon: IconButton(
-                              icon: Icon(
-                                _isObscure
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                              ),
-                              onPressed: () =>
-                                  setState(() => _isObscure = !_isObscure),
+                              icon: Icon(_isObscure ? Icons.visibility_off : Icons.visibility),
+                              onPressed: () => setState(() => _isObscure = !_isObscure),
                             ),
                             filled: true,
                             fillColor: Colors.grey[100],
@@ -164,22 +155,19 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
                       const SizedBox(height: 40),
 
-                      
                       SizedBox(
                         width: double.infinity,
                         height: 55,
                         child: ElevatedButton(
                           onPressed: _handleReset,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xff800000),
+                            backgroundColor: AppColors.primary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
                           child: Text(
-                            _isEmailVerified
-                                ? "Reset Password"
-                                : "Verify Email",
+                            _isEmailVerified ? "Reset Password" : "Verify Email",
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
