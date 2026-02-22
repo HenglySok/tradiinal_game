@@ -15,7 +15,7 @@ class SavedListScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xff800000),
         title: const Text(
-          "បញ្ជីរក្សាទុក",
+          "រក្សាទុក",
           style: TextStyle(color: Color(0xffFFD700)),
         ),
         leading: IconButton(

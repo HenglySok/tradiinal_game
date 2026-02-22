@@ -15,7 +15,7 @@ class LikedListScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xff800000), // Dark Red
         title: const Text(
-          "ល្បែងដែលចូលចិត្ត",
+          "ចូលចិត្ត",
           style: TextStyle(color: Color(0xffFFD700)),
         ),
         leading: IconButton(
