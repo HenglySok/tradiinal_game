@@ -43,12 +43,18 @@ class HomeScreen extends StatelessWidget {
           : SingleChildScrollView(
               child: Column(
                 children: [
+                  // Banner Image
                   Image.asset(
                     'assets/images/banner.png',
                     width: double.infinity,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) =>
+                        const SizedBox(
+                          height: 200,
+                          child: Icon(Icons.image_not_supported),
+                        ),
                   ),
-                  // Render sections based on the game 'type' field
+
                   _buildSection(
                     context,
                     title: "ធ្លាប់អានញាក់សាច់",
@@ -110,7 +116,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 200, // Adjusted height for better card display
+          height: 220, // Increased slightly for better card fit
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -120,22 +126,20 @@ class HomeScreen extends StatelessWidget {
 
               return GestureDetector(
                 onTap: () {
-                  // Add to history and Navigate to Detail
                   Provider.of<GameProvider>(
                     context,
                     listen: false,
                   ).addToHistory(game);
-
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      // IMPORTANT: Pass the whole object
                       builder: (context) => DetailScreen(game: game),
                     ),
                   );
                 },
                 child: GameCard(
-                  // Use nameKh or title based on your model's property
+                  // FIXED: The Model now handles the 'assets/' prefix.
+                  // Just pass game.imagePath directly.
                   imagePath: game.imagePath,
                   title: game.nameKh,
                   views: game.views,

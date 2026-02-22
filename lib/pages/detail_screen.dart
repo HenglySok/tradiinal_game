@@ -55,7 +55,7 @@ class DetailScreen extends StatelessWidget {
                     onPressed: () => userProvider.toggleLike(game),
                     icon: Icon(
                       isLiked ? Icons.favorite : Icons.favorite_border,
-                      color: Colors.red,
+                      color: const Color(0xFF800000),
                       size: 30,
                     ),
                   ),

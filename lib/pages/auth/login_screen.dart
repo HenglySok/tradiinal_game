@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:tradinal_game/main_wrapper.dart';
 import 'package:tradinal_game/providers/user_provider.dart';
 import 'package:tradinal_game/pages/auth/signup_screen.dart';
+// CRITICAL: This import must exist to avoid the "InvalidType" error
+import 'package:tradinal_game/pages/auth/forget_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -40,7 +42,9 @@ class _LoginScreenState extends State<LoginScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text("អ៊ីមែល ឬលេខសម្ងាត់មិនត្រឹមត្រូវ!"),
+            content: Text(
+              "អ៊ីមែល ឬលេខសម្ងាត់មិនត្រឹមត្រូវ! (Invalid Credentials)",
+            ),
             backgroundColor: Colors.red,
           ),
         );
@@ -50,21 +54,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Reusable border style for symmetry
     final outlineBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
       borderSide: const BorderSide(color: Colors.grey),
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xff800000),
+      backgroundColor: const Color(0xff800000), // Dark Red
       body: Column(
         children: [
           const SizedBox(height: 60),
           const Text(
             "ល្បែងប្រជាប្រិយខ្មែរ",
             style: TextStyle(
-              color: Color(0xffFFD700),
+              color: Color(0xffFFD700), // Gold
               fontSize: 28,
               fontWeight: FontWeight.bold,
             ),
@@ -91,11 +94,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 30),
 
-                      // Email Field with OutlineBox
+                      // Email Field
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
-                          hintText: "Email or Phone number",
+                          hintText: "Email Address",
                           prefixIcon: const Icon(Icons.email_outlined),
                           enabledBorder: outlineBorder,
                           focusedBorder: outlineBorder.copyWith(
@@ -104,32 +107,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               width: 2,
                             ),
                           ),
-                          errorBorder: outlineBorder.copyWith(
-                            borderSide: const BorderSide(color: Colors.red),
-                          ),
-                          focusedErrorBorder: outlineBorder.copyWith(
-                            borderSide: const BorderSide(
-                              color: Colors.red,
-                              width: 2,
-                            ),
-                          ),
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please enter your email";
-                          }
-                          final emailRegex = RegExp(
-                            r"^[a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-                          );
-                          if (!emailRegex.hasMatch(value.trim())) {
-                            return "Invalid email format (missing @ or .)";
-                          }
-                          return null;
-                        },
+                        validator: (value) => (value == null || value.isEmpty)
+                            ? "Please enter your email"
+                            : null,
                       ),
                       const SizedBox(height: 15),
 
-                      // Password Field with Toggle & OutlineBox
+                      // Password Field
                       TextFormField(
                         controller: _passwordController,
                         obscureText: _isObscure,
@@ -141,7 +126,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               _isObscure
                                   ? Icons.visibility_off
                                   : Icons.visibility,
-                              color: Colors.grey,
                             ),
                             onPressed: () =>
                                 setState(() => _isObscure = !_isObscure),
@@ -154,14 +138,33 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        validator: (value) {
-                          if (value == null || value.length < 8) {
-                            return "Password must be >= 8 characters";
-                          }
-                          return null;
-                        },
+                        validator: (value) =>
+                            (value == null || value.length < 8)
+                            ? "Min 8 characters required"
+                            : null,
                       ),
-                      const SizedBox(height: 25),
+
+                      // Forget Password Link - Moved inside the Form
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ForgetPasswordScreen(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            "forgot password?",
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 15),
 
                       // Sign In Button
                       SizedBox(
@@ -183,7 +186,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
 
                       const SizedBox(height: 20),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

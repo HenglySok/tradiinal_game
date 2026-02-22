@@ -23,12 +23,18 @@ class TraditionalGame {
     Map<String, dynamic> listJson,
     Map<String, dynamic>? detailJson,
   ) {
+    String rawPath = listJson['imagePath'] ?? "";
+    // Fix for Android: Ensure path starts with 'assets/'
+    String fixedPath = rawPath.startsWith('assets/')
+        ? rawPath
+        : 'assets/$rawPath';
+
     return TraditionalGame(
-      id: listJson['id'],
+      id: listJson['id'] ?? 0,
       title: listJson['title'] ?? "",
-      views: listJson['views']?.toString() ?? "0", // Map views from games.json
-      imagePath: listJson['imagePath'] ?? "",
-      type: listJson['type'] ?? "other", // Map type for HomeScreen filtering
+      views: listJson['views']?.toString() ?? "0",
+      imagePath: fixedPath,
+      type: listJson['type'] ?? "other",
       nameKh: detailJson?['name_kh'] ?? listJson['title'] ?? "",
       nameEn: detailJson?['name_en'] ?? "",
       description: GameDescription.fromJson(detailJson?['description'] ?? {}),
@@ -52,9 +58,9 @@ class GameDescription {
   factory GameDescription.fromJson(Map<String, dynamic> json) {
     return GameDescription(
       history: json['history'] ?? "",
-      timePlace: json['time_place'] ?? {},
-      materials: json['materials'] ?? {},
-      howToPlay: json['how_to_play'] ?? {},
+      timePlace: Map<String, dynamic>.from(json['time_place'] ?? {}),
+      materials: Map<String, dynamic>.from(json['materials'] ?? {}),
+      howToPlay: Map<String, dynamic>.from(json['how_to_play'] ?? {}),
     );
   }
 }

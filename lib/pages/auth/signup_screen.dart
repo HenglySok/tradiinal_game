@@ -18,25 +18,25 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _passController = TextEditingController();
   final TextEditingController _confirmPassController = TextEditingController();
 
+  // State for toggling password visibility
+  bool _obscurePassword = true;
+
   void _handleSignUp() {
     final userProv = Provider.of<UserProvider>(context, listen: false);
 
-    // 1. Validate form fields
     if (_formKey.currentState!.validate()) {
       final String name = _nameController.text.trim();
       final String email = _emailController.text.trim();
       final String password = _passController.text;
 
-      // 2. Logic: Check if Gmail already exists
       if (userProv.checkEmailExists(email)) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text("Email នេះមានរួចហើយ! (Email already exists)"),
+            content: Text("Email already exists"),
             backgroundColor: Colors.red,
           ),
         );
       } else {
-        // 3. Logic: Save to Provider and Navigate
         userProv.registerUser(name, email, password);
 
         ScaffoldMessenger.of(context).showSnackBar(
@@ -59,7 +59,7 @@ class _SignupScreenState extends State<SignupScreen> {
             const Text(
               "ល្បែងប្រជាប្រិយខ្មែរ",
               style: TextStyle(
-                color: Color(0xffFFD700),
+                color: Color(0xffFFD700), // Gold Text
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
@@ -100,36 +100,55 @@ class _SignupScreenState extends State<SignupScreen> {
                           : null,
                     ),
 
-                    // Gmail Validation
+                    // Universal Email Validation (Allows any @domain)
                     _buildInputField(
                       controller: _emailController,
-                      hint: "Email (Must be @gmail.com)",
+                      hint: "Email Address",
                       icon: Icons.email_outlined,
                       validator: (val) {
-                        if (val == null || !val.endsWith("@gmail.com")) {
-                          return "Use a valid @gmail.com address";
+                        if (val == null || val.isEmpty) {
+                          return "Please enter your email";
+                        }
+                        // Regex to check for standard email format
+                        final bool emailValid = RegExp(
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+                        ).hasMatch(val);
+                        if (!emailValid) {
+                          return "Enter a valid email (e.g. name@example.com)";
                         }
                         return null;
                       },
                     ),
 
-                    // Password Length Validation (Min 8)
+                    // Password with Visibility Toggle
                     _buildInputField(
                       controller: _passController,
                       hint: "Password",
                       icon: Icons.lock_outline,
                       isPassword: true,
+                      obscureText: _obscurePassword,
+                      onToggleVisibility: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
                       validator: (val) => (val == null || val.length < 8)
                           ? "Min 8 characters required"
                           : null,
                     ),
 
-                    // Confirm Password Logic
+                    // Confirm Password with Visibility Toggle
                     _buildInputField(
                       controller: _confirmPassController,
                       hint: "Confirm Password",
                       icon: Icons.lock_reset_outlined,
                       isPassword: true,
+                      obscureText: _obscurePassword,
+                      onToggleVisibility: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
                       validator: (val) => (val != _passController.text)
                           ? "Passwords do not match"
                           : null,
@@ -190,15 +209,27 @@ class _SignupScreenState extends State<SignupScreen> {
     required IconData icon,
     required String? Function(String?)? validator,
     bool isPassword = false,
+    bool obscureText = false,
+    VoidCallback? onToggleVisibility,
   }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: TextFormField(
         controller: controller,
-        obscureText: isPassword,
+        obscureText: isPassword ? obscureText : false,
         decoration: InputDecoration(
           hintText: hint,
           prefixIcon: Icon(icon, color: Colors.grey),
+          // Suffix icon for password visibility
+          suffixIcon: isPassword
+              ? IconButton(
+                  icon: Icon(
+                    obscureText ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.grey,
+                  ),
+                  onPressed: onToggleVisibility,
+                )
+              : null,
           filled: true,
           fillColor: Colors.grey[100],
           border: OutlineInputBorder(
