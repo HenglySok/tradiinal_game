@@ -97,22 +97,13 @@ class HomeScreen extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 20, 16, 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xff800000),
-                ),
-              ),
-              const Text(
-                "មើលទាំងអស់",
-                style: TextStyle(color: Colors.grey, fontSize: 14),
-              ),
-            ],
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Color(0xff800000),
+            ),
           ),
         ),
         SizedBox(
