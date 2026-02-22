@@ -17,14 +17,11 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: AppColors.primary, 
+        backgroundColor: AppColors.primary,
         elevation: 0,
         title: const Text(
           "ល្បែងប្រជាប្រិយខ្មែរ",
-          style: TextStyle(
-            color: AppColors.gold, 
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: AppColors.gold, fontWeight: FontWeight.bold),
         ),
         actions: [
           Padding(
@@ -44,7 +41,6 @@ class HomeScreen extends StatelessWidget {
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  
                   Image.asset(
                     'assets/images/banner.png',
                     width: double.infinity,
@@ -108,7 +104,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 220, 
+          height: 220,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -130,8 +126,6 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
                 child: GameCard(
-                  
-                  
                   imagePath: game.imagePath,
                   title: game.nameKh,
                   views: game.views,

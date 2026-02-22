@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/game_model.dart';
-import '../providers/user_provider.dart'; 
+import '../providers/user_provider.dart';
 import 'package:tradinal_game/Colors/app_colors.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -10,7 +10,6 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     final userProvider = Provider.of<UserProvider>(context);
     final bool isSaved = userProvider.isSaved(game.id);
     final bool isLiked = userProvider.isLiked(game.id);
@@ -18,7 +17,7 @@ class DetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.lightGray,
       appBar: AppBar(
-        backgroundColor: AppColors.primary, 
+        backgroundColor: AppColors.primary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: AppColors.gold),
           onPressed: () => Navigator.pop(context),
@@ -38,7 +37,6 @@ class DetailScreen extends StatelessWidget {
           children: [
             _buildHeaderImage(),
 
-            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -48,7 +46,7 @@ class DetailScreen extends StatelessWidget {
                     onPressed: () => userProvider.toggleSave(game),
                     icon: Icon(
                       isSaved ? Icons.bookmark : Icons.bookmark_border,
-                      color: AppColors.primary, 
+                      color: AppColors.primary,
                       size: 30,
                     ),
                   ),

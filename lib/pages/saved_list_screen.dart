@@ -15,10 +15,7 @@ class SavedListScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: AppColors.primary,
-        title: const Text(
-          "រក្សាទុក",
-          style: TextStyle(color: AppColors.gold),
-        ),
+        title: const Text("រក្សាទុក", style: TextStyle(color: AppColors.gold)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: AppColors.gold),
           onPressed: () => Navigator.pop(context),

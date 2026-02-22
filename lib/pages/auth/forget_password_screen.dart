@@ -15,7 +15,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _newPassController = TextEditingController();
 
-  
   bool _isEmailVerified = false;
   bool _isObscure = true;
 
@@ -24,7 +23,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     final String email = _emailController.text.trim();
 
     if (!_isEmailVerified) {
-      
       if (userProv.checkEmailExists(email)) {
         setState(() {
           _isEmailVerified = true;
@@ -43,7 +41,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         );
       }
     } else {
-      
       if (_formKey.currentState!.validate()) {
         userProv.updatePassword(email, _newPassController.text);
 
@@ -51,7 +48,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           const SnackBar(content: Text("Password updated successfully!")),
         );
 
-        Navigator.pop(context); 
+        Navigator.pop(context);
       }
     }
   }
@@ -97,7 +94,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _isEmailVerified ? "Set New Password" : "Verify Account",
+                        _isEmailVerified
+                            ? "Set New Password"
+                            : "Verify Account",
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -120,7 +119,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           hintText: "Email Address",
                           prefixIcon: const Icon(Icons.email_outlined),
                           filled: true,
-                          fillColor: _isEmailVerified ? Colors.grey[200] : Colors.grey[100],
+                          fillColor: _isEmailVerified
+                              ? Colors.grey[200]
+                              : Colors.grey[100],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide.none,
@@ -137,8 +138,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                             hintText: "New Password",
                             prefixIcon: const Icon(Icons.lock_outline),
                             suffixIcon: IconButton(
-                              icon: Icon(_isObscure ? Icons.visibility_off : Icons.visibility),
-                              onPressed: () => setState(() => _isObscure = !_isObscure),
+                              icon: Icon(
+                                _isObscure
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                              onPressed: () =>
+                                  setState(() => _isObscure = !_isObscure),
                             ),
                             filled: true,
                             fillColor: Colors.grey[100],
@@ -167,7 +173,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                             ),
                           ),
                           child: Text(
-                            _isEmailVerified ? "Reset Password" : "Verify Email",
+                            _isEmailVerified
+                                ? "Reset Password"
+                                : "Verify Email",
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,

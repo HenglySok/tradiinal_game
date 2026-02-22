@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tradinal_game/providers/game_provider.dart';
 import 'package:tradinal_game/pages/detail_screen.dart';
 import 'package:tradinal_game/Colors/app_colors.dart';
-import 'package:tradinal_game/models/game_model.dart'; 
+import 'package:tradinal_game/models/game_model.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
@@ -18,7 +18,7 @@ class HistoryScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-          title: const Text(
+        title: const Text(
           "ប្រវត្តិនៃការអាន",
           style: TextStyle(
             color: AppColors.primary,
@@ -52,7 +52,7 @@ class HistoryScreen extends StatelessWidget {
                     itemCount: history.length,
                     itemBuilder: (context, index) {
                       final game = history[index];
-                      
+
                       return _buildHistoryCard(context, game);
                     },
                   ),
@@ -62,7 +62,6 @@ class HistoryScreen extends StatelessWidget {
     );
   }
 
-  
   Widget _buildHistoryCard(BuildContext context, TraditionalGame game) {
     return GestureDetector(
       onTap: () {
@@ -90,7 +89,7 @@ class HistoryScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.asset(
-                game.imagePath, 
+                game.imagePath,
                 width: 80,
                 height: 80,
                 fit: BoxFit.cover,
@@ -104,7 +103,7 @@ class HistoryScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    game.nameKh, 
+                    game.nameKh,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -112,7 +111,7 @@ class HistoryScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    "${game.views} views", 
+                    "${game.views} views",
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ],

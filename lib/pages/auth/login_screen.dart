@@ -95,7 +95,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 30),
 
-                      
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
@@ -115,7 +114,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 15),
 
-                      
                       TextFormField(
                         controller: _passwordController,
                         obscureText: _isObscure,
@@ -145,7 +143,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             : null,
                       ),
 
-                      
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
@@ -167,7 +164,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       const SizedBox(height: 15),
 
-                      
                       SizedBox(
                         width: double.infinity,
                         height: 55,

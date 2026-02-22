@@ -15,18 +15,16 @@ class MainWrapper extends StatefulWidget {
 class _MainWrapperState extends State<MainWrapper> {
   int _selectedIndex = 0;
 
-  
   final List<Widget> _pages = [
     const HomeScreen(),
     const SearchScreen(),
-    const HistoryScreen(), 
-    const ProfileScreen(), 
+    const HistoryScreen(),
+    const ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
         height: 85,
@@ -55,7 +53,7 @@ class _MainWrapperState extends State<MainWrapper> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          _selectedIndex = index; 
+          _selectedIndex = index;
         });
       },
       child: Column(
