@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tradinal_game/Colors/app_colors.dart';
 import 'package:tradinal_game/providers/game_provider.dart';
 import 'package:tradinal_game/pages/detail_screen.dart';
-import 'package:tradinal_game/models/game_model.dart'; 
+import 'package:tradinal_game/models/game_model.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -28,7 +28,6 @@ class SearchScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
@@ -46,7 +45,6 @@ class SearchScreen extends StatelessWidget {
             ),
           ),
 
-          
           Expanded(
             child: results.isEmpty
                 ? const Center(child: Text("មិនឃើញមានល្បែងដែលអ្នកស្វែងរកទេ"))
@@ -63,11 +61,9 @@ class SearchScreen extends StatelessWidget {
     );
   }
 
-  
   Widget _searchResultCard(BuildContext context, TraditionalGame game) {
     return ListTile(
       onTap: () {
-        
         Provider.of<GameProvider>(context, listen: false).addToHistory(game);
 
         Navigator.push(
@@ -78,7 +74,7 @@ class SearchScreen extends StatelessWidget {
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Image.asset(
-          game.imagePath, 
+          game.imagePath,
           width: 50,
           height: 50,
           fit: BoxFit.cover,
@@ -87,10 +83,10 @@ class SearchScreen extends StatelessWidget {
         ),
       ),
       title: Text(
-        game.nameKh, 
+        game.nameKh,
         style: const TextStyle(fontWeight: FontWeight.bold),
       ),
-      subtitle: Text("${game.views} views"), 
+      subtitle: Text("${game.views} views"),
       trailing: const Icon(Icons.arrow_forward_ios, size: 14),
     );
   }
