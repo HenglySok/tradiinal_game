@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tradinal_game/Colors/app_colors.dart';
 import 'package:tradinal_game/providers/game_provider.dart';
 import 'package:tradinal_game/pages/detail_screen.dart';
 import 'package:tradinal_game/models/game_model.dart'; 
@@ -20,7 +21,7 @@ class SearchScreen extends StatelessWidget {
         title: const Text(
           "ស្វែងរកល្បែង",
           style: TextStyle(
-            color: Color(0xff800000),
+            color: AppColors.primary,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -34,7 +35,7 @@ class SearchScreen extends StatelessWidget {
               onChanged: (value) => gameProvider.searchGames(value),
               decoration: InputDecoration(
                 hintText: "វាយឈ្មោះល្បែងនៅទីនេះ...",
-                prefixIcon: const Icon(Icons.search, color: Color(0xff800000)),
+                prefixIcon: const Icon(Icons.search, color: AppColors.primary),
                 filled: true,
                 fillColor: Colors.grey[100],
                 border: OutlineInputBorder(

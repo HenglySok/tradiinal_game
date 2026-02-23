@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tradinal_game/Colors/app_colors.dart';
 import 'package:tradinal_game/providers/user_provider.dart';
 import 'package:tradinal_game/pages/auth/login_screen.dart';
 import 'package:tradinal_game/pages/saved_list_screen.dart'; 
