@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
 
                   _buildSection(
                     context,
-                    title: "ធ្លាប់អានញាក់សាច់",
+                    title: "ធ្លាប់អានញឹកញប់",
                     games: gameProvider.games
                         .where((g) => g.type == 'popular')
                         .toList(),
